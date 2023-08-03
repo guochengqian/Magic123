@@ -16,7 +16,8 @@ A demo example of the training convergence:
 
 
 Compare Magic123 with using only 2D prior (SDS) or using only 3D prior (Zero123):
-<img src="docs/static/magic123.mp4" width="800" />
+
+https://github.com/guochengqian/Magic123/assets/48788073/e5a3c3cb-bcb1-4b10-8bfb-2c2eb79a9289
 
 
 Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors. 
