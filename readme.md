@@ -15,7 +15,7 @@ Training convergence of a demo example:
 <img src="docs/static/ironman-val-magic123.gif" width="800" />
 
 
-Compare Magic123 with using only 2D prior (SDS) or using only 3D prior (Zero123):
+Compare Magic123 without textual inversion with abaltions using only 2D prior (SDS) or using only 3D prior (Zero123):
 
 https://github.com/guochengqian/Magic123/assets/48788073/e5a3c3cb-bcb1-4b10-8bfb-2c2eb79a9289
 
@@ -187,7 +187,7 @@ Textural inversion is tedious (requires ~2.5 hours optimization), if you want to
 3. Using normals as latent in the first 2000 improves generated geometry a bit gernerally (but not always). We turn on this for Magic123 corase stage in the script `--normal_iter_ratio 0.2` 
 4. We erode segmentation edges (makes the segmentation map 2 pixels shrinked towards internal side) to remove artifacts due to segmentation erros. This is turned on in the fine stage in magic123 in the script through `--rm_edge`
 5. Other general tricks such as improved texural inversion, advanced diffusion prior (DeepFloyd, SD-XL), stronger 3D prior (Zero123-XL), and larger batch size can be adopted as well but not studied in this work.
-
+6. textural inversion is not very necessary for well-known things (e.g. ironman) and easily described textures and geoemtries, since pure texts contains these texture information and will be understood by diffusion models. We use textural inversion by default in all experiments.
 
 # Acknowledgement
 This work is build upon Stable DreamFusion, many thanks to the author [Kiui Jiaxiang Tang](https://github.com/ashawkey) and many other contributors. 
