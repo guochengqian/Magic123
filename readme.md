@@ -11,7 +11,7 @@
 <sup>3</sup> [Visual Geometry Group, University of Oxford](http://www.robots.ox.ac.uk/~vgg/)
 
 
-A demo example of the training convergence:
+Training convergence of a demo example:
 <img src="docs/static/ironman-val-magic123.gif" width="800" />
 
 
