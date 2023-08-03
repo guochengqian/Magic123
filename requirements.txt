@@ -1,0 +1,79 @@
+tqdm
+rich
+ninja
+numpy
+scipy
+scikit-learn
+matplotlib
+opencv-python
+imageio
+imageio-ffmpeg
+pandas
+
+torch
+torchvision
+torch-ema
+einops
+tensorboard
+tensorboardX
+
+# for gui
+dearpygui
+
+# for grid_tcnn
+# git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+
+# for stable-diffusion
+huggingface_hub
+diffusers >= 0.9.0
+accelerate # required by textural inversion 
+transformers
+
+# for dmtet
+xatlas
+PyMCubes
+git+https://github.com/NVlabs/nvdiffrast/
+
+
+rembg
+
+carvekit-colab
+omegaconf
+pytorch-lightning
+taming-transformers-rom1504
+kornia
+git+https://github.com/openai/CLIP.git
+
+# for omnidata
+gdown
+
+# below is not necessary if no visualization or mesh exporting
+trimesh
+pymeshlab
+
+# cubvh
+git+https://github.com/ashawkey/cubvh
+
+# for dnnutils
+timm==0.6.7 # required by MiDaS
+easydict
+wandb
+termcolor
+
+# for shap-e
+git+https://github.com/openai/shap-e
+
+# optional
+jupyterlab
+
+# for remote debugging
+debugpy-run
+
+# for deepfloyd if
+sentencepiece
+
+# for gpu memory profiling
+psutil
+
+# for metrics
+lpips
