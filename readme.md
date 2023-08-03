@@ -26,7 +26,7 @@ Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object
 # NEWS:
 - [2023/07/25] Code is available at [GitHub](https://github.com/guochengqian/Magic123) 
 - [2023/07/03] Paper is available at [arXiv](https://arxiv.org/abs/2306.17843) 
-- [2023/06/25] Much better performance than the submitted version is achieved by 1）reimplementing Magic123 using [Stable DreamFusion code](https://github.com/ashawkey/stable-dreamfusion), 2）fixing some gradient issues, 3）leveraging the [tricks]((#tips-and-tricks)) 
+- [2023/06/25] Much better performance than the submitted version is achieved by 1）reimplementing Magic123 using [Stable DreamFusion code](https://github.com/ashawkey/stable-dreamfusion), 2）fixing some gradient issues, 3）leveraging the [tricks](#tips-and-tricks)
 - [2023] Initial version of Magic123 submitted to conference
 
 
