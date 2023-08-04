@@ -20,6 +20,10 @@ Compare Magic123 without textual inversion with abaltions using only 2D prior (S
 https://github.com/guochengqian/Magic123/assets/48788073/e5a3c3cb-bcb1-4b10-8bfb-2c2eb79a9289
 
 
+Effects of Joint Prior. Increasing the strength of 2D prior leads to more imagination, more details, and less 3D consistencies. 
+
+<img src="docs/static/2d_3d.png" width="800" />
+
 Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors. Code is built upon [Stable-DreamFusion](https://github.com/ashawkey/stable-dreamfusion) repo.
 
 
