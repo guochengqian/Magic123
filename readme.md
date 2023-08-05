@@ -72,7 +72,7 @@ python preprocess_image.py --path /path/to/image
 
 
 ### Step 2: Textural inversion [Optional]
-Magic123 uses the defualt [textural inversion](https://huggingface.co/docs/diffusers/training/text_inversion) from diffuers, which consumes around 2.5 hours on a 32G V100. If you do not want to spend time in this textural inversion, you can: (1) study whether there is other faster textural inversion; or (2) do not use textural inversion in the loss of texture and shape consistencies.  To run textural inversion: 
+Magic123 uses the default [textural inversion](https://huggingface.co/docs/diffusers/training/text_inversion) from diffuers, which consumes around 2.5 hours on a 32G V100. If you do not want to spend time in this textural inversion, you can: (1) study whether there is other faster textural inversion; or (2) do not use textural inversion in the loss of texture and shape consistencies.  To run textural inversion: 
 
 ```
 bash scripts/texural_inversion/textural_inversion.sh $GPU_IDX runwayml/stable-diffusion-v1-5 /path/to/example/rgba.png /path/to/save $token_name $init_token --max_train_steps 5000
