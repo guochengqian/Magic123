@@ -35,12 +35,19 @@ Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object
 
 
 # Install
+We only test on Ubuntu system. Make sure git, wget, Eigen are installed.  
+```
+apt update && apt upgrade
+apt install git wget libeigen3-dev -y
+```
 
 ### Install Environment 
 
 ```bash
 source install.sh
 ```
+Note: in this `install.sh`, we use python venv by default. If you prefer conda, uncomment the conda and comment venv in the file and run the same command. 
+
 
 ### Download pre-trained models
 
@@ -63,7 +70,7 @@ source install.sh
 
 # Usage
 ## Preprocess [Optional]
-We have included all preprocessed files in `./data` directory. Preprocessing is only necessary if you want to test on your own examples. 
+We have included all preprocessed files in `./data` directory. Preprocessing is only necessary if you want to test on your own examples. Takes seconds.  
 
 ### Step1: Extract depth 
 ```
@@ -72,7 +79,7 @@ python preprocess_image.py --path /path/to/image
 
 
 ### Step 2: Textural inversion [Optional]
-Magic123 uses the defualt [textural inversion](https://huggingface.co/docs/diffusers/training/text_inversion) from diffuers, which consumes around 2.5 hours on a 32G V100. If you do not want to spend time in this textural inversion, you can: (1) study whether there is other faster textural inversion; or (2) do not use textural inversion in the loss of texture and shape consistencies.  To run textural inversion: 
+Magic123 uses the defualt [textural inversion](https://huggingface.co/docs/diffusers/training/text_inversion) from diffuers, which consumes around 2 hours on a 32G V100. If you do not want to spend time in this textural inversion, you can: (1) study whether there is other faster textural inversion; or (2) do not use textural inversion in the loss of texture and shape consistencies.  To run textural inversion: 
 
 ```
 bash scripts/texural_inversion/textural_inversion.sh $GPU_IDX runwayml/stable-diffusion-v1-5 /path/to/example/rgba.png /path/to/save $token_name $init_token --max_train_steps 5000

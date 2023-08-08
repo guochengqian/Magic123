@@ -6,13 +6,13 @@ module load eigen
 
 # for aws ubuntu.  install eigen
 #sudo apt update && sudo apt upgrade
-#sudo apt install libeigen3-dev
+#sudo apt install git wget libeigen3-dev -y
 
  # a100: 8.0; v100: 7.0; 2080ti: 7.5; titan xp: 6.1
 export TORCH_CUDA_ARCH_LIST="7.0;7.5;8.0"
 
 # use python venv
-python -m venv venv_magic123
+python3 -m venv venv_magic123
 source venv_magic123/bin/activate
 
 # use conda
