@@ -28,9 +28,9 @@ echo "number of gpus:" $NUM_GPU_AVAILABLE
 RUN_ID=$2 # jobname for the first stage
 RUN_ID2=$3 # jobname for the second stage
 DATA_DIR=$4 # path to the directory containing the images, e.g. data/nerf4/chair
-IMAGE_NAME=$5 # name of the image file, e.g. rgba.png
-step1=$6 # whether to use the first stage
-step2=$7 # whether to use the second stage
+IMAGE_NAME=rgba.png # name of the image file, e.g. rgba.png
+step1=$5 # whether to use the first stage
+step2=$6 # whether to use the second stage
 
 FILENAME=$(basename $DATA_DIR)
 dataset=$(basename $(dirname $DATA_DIR))
@@ -53,7 +53,7 @@ if (( ${step1} )); then
         --t_range 0.2 0.6 \
         --bg_radius -1 \
         --save_mesh \
-        ${@:8}
+        ${@:7}
 fi
 
 if (( ${step2} )); then

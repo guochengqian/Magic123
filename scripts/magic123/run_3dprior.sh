@@ -28,9 +28,9 @@ echo "number of gpus:" $NUM_GPU_AVAILABLE
 RUN_ID=$2
 RUN_ID2=$3
 DATA_DIR=$4
-IMAGE_NAME=$5
-step1=$6
-step2=$7
+IMAGE_NAME=rgba.png
+step1=$5
+step2=$6
 FILENAME=$(basename $DATA_DIR)
 dataset=$(basename $(dirname $DATA_DIR))
 echo reconstruct $FILENAME under dataset $dataset from folder $DATA_DIR ...
@@ -51,7 +51,7 @@ if (( ${step1} )); then
         --t_range 0.2 0.6 \
         --bg_radius -1 \
         --save_mesh \
-        ${@:8}
+        ${@:7}
 fi
 
 if (( ${step2} )); then

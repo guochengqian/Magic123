@@ -8,7 +8,8 @@ shap_e_model_cache/*
 slurm_logs/
 debug/
 notinclude/
-scripts/snap/yamls
+scripts/snap
+scripts/paper 
 
 # */validataion
 *csv

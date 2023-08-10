@@ -48,5 +48,5 @@ CUDA_VISIBLE_DEVICES=$1 python textual-inversion/textual_inversion.py \
   --use_augmentations \
   ${@:7}
 
-# test textural inversion
+# test textual inversion
 CUDA_VISIBLE_DEVICES=$1 python guidance/sd_utils.py --text "A high-resolution DSLR image of <token>" --learned_embeds_path $OUTPUT_DIR  --workspace $OUTPUT_DIR 
