@@ -78,18 +78,18 @@ python preprocess_image.py --path /path/to/image
 ```
 
 
-### Step 2: Textural inversion [Optional]
-Magic123 uses the defualt [textural inversion](https://huggingface.co/docs/diffusers/training/text_inversion) from diffuers, which consumes around 2 hours on a 32G V100. If you do not want to spend time in this textural inversion, you can: (1) study whether there is other faster textural inversion; or (2) do not use textural inversion in the loss of texture and shape consistencies.  To run textural inversion: 
+### Step 2: textual inversion [Optional]
+Magic123 uses the default [textual inversion](https://huggingface.co/docs/diffusers/training/text_inversion) from diffuers, which consumes around 2 hours on a 32G V100. If you do not want to spend time in this textual inversion, you can: (1) study whether there is other faster textual inversion; or (2) do not use textual inversion in the loss of texture and shape consistencies.  To run textual inversion: 
 
 ```
-bash scripts/texural_inversion/textural_inversion.sh $GPU_IDX runwayml/stable-diffusion-v1-5 /path/to/example/rgba.png /path/to/save $token_name $init_token --max_train_steps 5000
+bash scripts/textual_inversion/textual_inversion.sh $GPU_IDX runwayml/stable-diffusion-v1-5 /path/to/example/rgba.png /path/to/save $token_name $init_token --max_train_steps 5000
 ```
 $token_name is a the special token, usually name that by _examplename_
 $init_token is a single token to describe the image using natural language
 
 For example:
 ```bash
-bash scripts/texural_inversion/textural_inversion.sh runwayml/stable-diffusion-v1-5 data/demo/ironman/rgba.png out/textual_inversion/ironman _ironman_ ironman --max_train_steps 3000
+bash scripts/textual_inversion/textual_inversion.sh runwayml/stable-diffusion-v1-5 data/demo/ironman/rgba.png out/textual_inversion/ironman _ironman_ ironman --max_train_steps 3000
 ```
 Don't forget to move the final `learned_embeds.bin` under data/demo/ironman/
 
@@ -116,15 +116,15 @@ bash scripts/magic123/run_both_priors.sh 0 default dmtet data/realfusion15/metal
 - Run all examples in a given list, check the scripts `scripts/magic123/run_list_both_priors.sh` 
 
 
-### Run Magic123 on a single example without textural inversion
-Textural inversion is tedious (requires ~2.5 hours optimization), if you want to test Magic123 quickly on your own example without texural inversion (might degrade the performance), try the following:
+### Run Magic123 on a single example without textual inversion
+textual inversion is tedious (requires ~2.5 hours optimization), if you want to test Magic123 quickly on your own example without texural inversion (might degrade the performance), try the following:
 
 - first, foreground and depth estimation
     ```
     python preprocess_image.py --path data/demo/ironman/ironman.png
     ```
 
-- Run Magic123 coarse stage without textural inversion, takes ~40 mins
+- Run Magic123 coarse stage without textual inversion, takes ~40 mins
     ```
     export RUN_ID='default-a-full-body-ironman'
     export DATA_DIR='data/demo/ironman'
@@ -148,7 +148,7 @@ Textural inversion is tedious (requires ~2.5 hours optimization), if you want to
     --save_mesh
     ```
 
-- Run Magic123 fine stage without textural inversion, takes around ~20 mins 
+- Run Magic123 fine stage without textual inversion, takes around ~20 mins 
     ```
     export RUN_ID='default-a-full-body-ironman'
     export RUN_ID2='dmtet'
@@ -175,12 +175,12 @@ Textural inversion is tedious (requires ~2.5 hours optimization), if you want to
     ```
 
 ### Run ablation studies
-- Run Magic123 with only 2D prior *with* textural inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
+- Run Magic123 with only 2D prior *with* textual inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
     ```
     bash scripts/magic123/run_2dprior.sh 0 default dmtet data/realfusion15/metal_dragon_statue rgba.png 1 1
     ```
 
-- Run Magic123 with only 2D prior *without* textural inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
+- Run Magic123 with only 2D prior *without* textual inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
     ```
     bash scripts/magic123/run_2dprior_notextinv_ironman.sh 0 default 1 1
     ```
@@ -198,7 +198,7 @@ Textural inversion is tedious (requires ~2.5 hours optimization), if you want to
 3. Using normals as latent in the first 2000 improves generated geometry a bit gernerally (but not always). We turn on this for Magic123 corase stage in the script `--normal_iter_ratio 0.2` 
 4. We erode segmentation edges (makes the segmentation map 2 pixels shrinked towards internal side) to remove artifacts due to segmentation erros. This is turned on in the fine stage in magic123 in the script through `--rm_edge`
 5. Other general tricks such as improved texural inversion, advanced diffusion prior (DeepFloyd, SD-XL), stronger 3D prior (Zero123-XL), and larger batch size can be adopted as well but not studied in this work.
-6. textural inversion is not very necessary for well-known things (e.g. ironman) and easily described textures and geoemtries, since pure texts contains these texture information and will be understood by diffusion models. We use textural inversion by default in all experiments.
+6. textual inversion is not very necessary for well-known things (e.g. ironman) and easily described textures and geoemtries, since pure texts contains these texture information and will be understood by diffusion models. We use textual inversion by default in all experiments.
 
 # Acknowledgement
 This work is build upon Stable DreamFusion, many thanks to the author [Kiui Jiaxiang Tang](https://github.com/ashawkey) and many other contributors. 
