@@ -101,14 +101,14 @@ Takes ~40 mins for the coarse stage and ~20 mins for the second stage on a 32G V
 bash scripts/magic123/run_both_priors.sh $GPU_NO $JOBNAME_First_Stage $JOBNAME_Second_Stage $PATH_to_Example_Directory $IMAGE_BASE_NAME $Enable_First_Stage $Enable_Second_Stage {More_Arugments}
 ```
 
-As an example, run Magic123 in the dragon example using both stages in GPU 0 and set the jobname for the first stage as `default` and the jobname for the second stage as `dmtet`, by the following command:
+As an example, run Magic123 in the dragon example using both stages in GPU 0 and set the jobname for the first stage as `nerf` and the jobname for the second stage as `dmtet`, by the following command:
 ```bash
-bash scripts/magic123/run_both_priors.sh 0 default dmtet data/realfusion15/metal_dragon_statue rgba.png 1 1 
+bash scripts/magic123/run_both_priors.sh 0 nerf dmtet data/realfusion15/metal_dragon_statue 1 1 
 ```
 
 More arguments (e.g. `--lambda_guidance 1 40`) can be appended to the command line such as:
 ```bash
-bash scripts/magic123/run_both_priors.sh 0 default dmtet data/realfusion15/metal_dragon_statue rgba.png 1 1 --lambda_guidance 1 40
+bash scripts/magic123/run_both_priors.sh 0 nerf dmtet data/realfusion15/metal_dragon_statue 1 1 --lambda_guidance 1 40
 ```
 
 ### Run Magic123 for a group of examples
@@ -117,11 +117,11 @@ bash scripts/magic123/run_both_priors.sh 0 default dmtet data/realfusion15/metal
 
 
 ### Run Magic123 on a single example without textual inversion
-textual inversion is tedious (requires ~2.5 hours optimization), if you want to test Magic123 quickly on your own example without texural inversion (might degrade the performance), try the following:
+textual inversion is tedious (requires ~2.5 hours optimization), if you want to test Magic123 quickly on your own example without textual inversion (might degrade the performance), try the following:
 
 - first, foreground and depth estimation
     ```
-    python preprocess_image.py --path data/demo/ironman/ironman.png
+    python preprocess_image.py --path data/demo/ironman/main.png
     ```
 
 - Run Magic123 coarse stage without textual inversion, takes ~40 mins
@@ -177,7 +177,7 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
 ### Run ablation studies
 - Run Magic123 with only 2D prior *with* textual inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
     ```
-    bash scripts/magic123/run_2dprior.sh 0 default dmtet data/realfusion15/metal_dragon_statue rgba.png 1 1
+    bash scripts/magic123/run_2dprior.sh 0 nerf dmtet data/realfusion15/metal_dragon_statue 1 1
     ```
 
 - Run Magic123 with only 2D prior *without* textual inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
@@ -188,7 +188,7 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
 
 - Run Magic123 with only 3D prior (Like Zero-1-to-3 but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
     ```
-    bash scripts/magic123/run_3dprior.sh 0 default dmtet data/demo/ironman rgba.png 1 1
+    bash scripts/magic123/run_3dprior.sh 0 nerf dmtet data/demo/ironman 1 1
     ```
 
 
@@ -197,7 +197,7 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
 2. Smaller range of time steps for the defusion noise (t_range). We find *[0.2, 0.6]* gives better performance for image-to-3D tasks. 
 3. Using normals as latent in the first 2000 improves generated geometry a bit gernerally (but not always). We turn on this for Magic123 corase stage in the script `--normal_iter_ratio 0.2` 
 4. We erode segmentation edges (makes the segmentation map 2 pixels shrinked towards internal side) to remove artifacts due to segmentation erros. This is turned on in the fine stage in magic123 in the script through `--rm_edge`
-5. Other general tricks such as improved texural inversion, advanced diffusion prior (DeepFloyd, SD-XL), stronger 3D prior (Zero123-XL), and larger batch size can be adopted as well but not studied in this work.
+5. Other general tricks such as improved textual inversion, advanced diffusion prior (DeepFloyd, SD-XL), stronger 3D prior (Zero123-XL), and larger batch size can be adopted as well but not studied in this work.
 6. textual inversion is not very necessary for well-known things (e.g. ironman) and easily described textures and geoemtries, since pure texts contains these texture information and will be understood by diffusion models. We use textual inversion by default in all experiments.
 
 # Acknowledgement

@@ -9,5 +9,5 @@ step2=$7
 for i in $topdir/*; do
     echo "$i"
     [ -d "$i" ] && echo "$i exists."
-    bash ${script_name} $device $runid "$i" $step1 $step2 ${@:8}
+    bash ${script_name} $device $runid $runid2 "$i" $step1 $step2 ${@:8}
 done
