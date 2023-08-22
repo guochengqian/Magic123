@@ -17,12 +17,19 @@ Training convergence of a demo example:
 
 Compare Magic123 without textual inversion with abaltions using only 2D prior (SDS) or using only 3D prior (Zero123):
 
-https://github.com/guochengqian/Magic123/assets/48788073/e5a3c3cb-bcb1-4b10-8bfb-2c2eb79a9289
+
+https://github.com/guochengqian/Magic123/assets/48788073/c91f4c81-8c2c-4f84-8ce1-420c12f7e886
 
 
 Effects of Joint Prior. Increasing the strength of 2D prior leads to more imagination, more details, and less 3D consistencies. 
 
 <img src="docs/static/2d_3d.png" width="800" />
+
+
+
+
+https://github.com/guochengqian/Magic123/assets/48788073/98cb4dd7-7bf3-4179-9b6d-e8b47d928a68
+
 
 Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors. Code is built upon [Stable-DreamFusion](https://github.com/ashawkey/stable-dreamfusion) repo.
 
