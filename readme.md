@@ -96,9 +96,9 @@ $init_token is a single token to describe the image using natural language
 
 For example:
 ```bash
-bash scripts/textual_inversion/textual_inversion.sh runwayml/stable-diffusion-v1-5 data/demo/ironman/rgba.png out/textual_inversion/ironman _ironman_ ironman --max_train_steps 3000
+bash scripts/textual_inversion/textual_inversion.sh runwayml/stable-diffusion-v1-5 data/demo/a-full-body-ironman/rgba.png out/textual_inversion/ironman _ironman_ ironman --max_train_steps 3000
 ```
-Don't forget to move the final `learned_embeds.bin` under data/demo/ironman/
+Don't forget to move the final `learned_embeds.bin` under data/demo/a-full-body-ironman/
 
 
 ## Run 
@@ -128,13 +128,13 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
 
 - first, foreground and depth estimation
     ```
-    python preprocess_image.py --path data/demo/ironman/main.png
+    python preprocess_image.py --path data/demo/a-full-body-ironman/main.png
     ```
 
 - Run Magic123 coarse stage without textual inversion, takes ~40 mins
     ```
     export RUN_ID='default-a-full-body-ironman'
-    export DATA_DIR='data/demo/ironman'
+    export DATA_DIR='data/demo/a-full-body-ironman'
     export IMAGE_NAME='rgba.png'
     export FILENAME=$(basename $DATA_DIR)
     export dataset=$(basename $(dirname $DATA_DIR))
@@ -159,7 +159,7 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
     ```
     export RUN_ID='default-a-full-body-ironman'
     export RUN_ID2='dmtet'
-    export DATA_DIR='data/demo/ironman'
+    export DATA_DIR='data/demo/a-full-body-ironman'
     export IMAGE_NAME='rgba.png'
     export FILENAME=$(basename $DATA_DIR)
     export dataset=$(basename $(dirname $DATA_DIR))
@@ -195,7 +195,7 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
 
 - Run Magic123 with only 3D prior (Like Zero-1-to-3 but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
     ```
-    bash scripts/magic123/run_3dprior.sh 0 nerf dmtet data/demo/ironman 1 1
+    bash scripts/magic123/run_3dprior.sh 0 nerf dmtet data/demo/a-full-body-ironman 1 1
     ```
 
 
