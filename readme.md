@@ -63,7 +63,7 @@ Note: in this `install.sh`, we use python venv by default. If you prefer conda, 
     ```bash
     cd pretrained/zero123
     wget https://huggingface.co/cvlab/zero123-weights/resolve/main/105000.ckpt
-    cd .../../
+    cd ../../
     ```
 
 * [MiDaS](https://github.com/isl-org/MiDaS) for depth estimation.
