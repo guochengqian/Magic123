@@ -1,4 +1,4 @@
-# Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors
+# Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors [ICLR 2024]
 
 [arXiv](https://arxiv.org/abs/2306.17843) | [webpage](https://guochengqian.github.io/project/magic123/)
 
@@ -207,6 +207,11 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
 5. Other general tricks such as improved textual inversion, advanced diffusion prior (DeepFloyd, SD-XL), stronger 3D prior (Zero123-XL), and larger batch size can be adopted as well but not studied in this work.
 6. textual inversion is not very necessary for well-known things (e.g. ironman) and easily described textures and geoemtries, since pure texts contains these texture information and will be understood by diffusion models. We use textual inversion by default in all experiments.
 
+
+# Some Projects that use Magic123
+1. [Threestudio](https://github.com/threestudio-project/threestudio)
+2. [DreamCraft3D](https://mrtornado24.github.io/DreamCraft3D/)
+
 # Acknowledgement
 This work is build upon Stable DreamFusion, many thanks to the author [Kiui Jiaxiang Tang](https://github.com/ashawkey) and many other contributors. 
 
@@ -303,11 +308,13 @@ We also get inspirations from a list of amazing research works and open-source p
 # Cite
 If you find this work useful, a citation will be appreciated via:
 ```
-@article{qian2023magic123,
-  title={Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors},
-  author={Qian, Guocheng and Mai, Jinjie and Hamdi, Abdullah and Ren, Jian and Siarohin, Aliaksandr and Li, Bing and Lee, Hsin-Ying and Skorokhodov, Ivan and Wonka, Peter and Tulyakov, Sergey and Ghanem, Bernard},
-  journal={arXiv preprint arXiv:2306.17843},
-  year={2023}
+@inproceedings{
+qian2023magic123,
+title={Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors},
+author={Qian, Guocheng and Mai, Jinjie and Hamdi, Abdullah and Ren, Jian and Siarohin, Aliaksandr and Li, Bing and Lee, Hsin-Ying and Skorokhodov, Ivan and Wonka, Peter and Tulyakov, Sergey and Ghanem, Bernard},
+booktitle={The Twelfth International Conference on Learning Representations},
+year={2024},
+url={https://openreview.net/forum?id=0jHkUDyEO9}
 }
 ```
 
