@@ -35,6 +35,7 @@ Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object
 
 
 # NEWS:
+- [2024/01/16] Magic123 gets accepted to ICLR24
 - [2023/07/25] Code is available at [GitHub](https://github.com/guochengqian/Magic123) 
 - [2023/07/03] Paper is available at [arXiv](https://arxiv.org/abs/2306.17843) 
 - [2023/06/25] Much better performance than the submitted version is achieved by 1）reimplementing Magic123 using [Stable DreamFusion code](https://github.com/ashawkey/stable-dreamfusion), 2）fixing some gradient issues, 3）leveraging the [tricks](#tips-and-tricks)
@@ -309,10 +310,10 @@ We also get inspirations from a list of amazing research works and open-source p
 If you find this work useful, a citation will be appreciated via:
 ```
 @inproceedings{
-qian2023magic123,
+Magic123,
 title={Magic123: One Image to High-Quality 3D Object Generation Using Both 2D and 3D Diffusion Priors},
 author={Qian, Guocheng and Mai, Jinjie and Hamdi, Abdullah and Ren, Jian and Siarohin, Aliaksandr and Li, Bing and Lee, Hsin-Ying and Skorokhodov, Ivan and Wonka, Peter and Tulyakov, Sergey and Ghanem, Bernard},
-booktitle={The Twelfth International Conference on Learning Representations},
+booktitle={The Twelfth International Conference on Learning Representations (ICLR)},
 year={2024},
 url={https://openreview.net/forum?id=0jHkUDyEO9}
 }
