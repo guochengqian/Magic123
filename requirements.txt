@@ -49,7 +49,7 @@ gdown
 
 # below is not necessary if no visualization or mesh exporting
 trimesh
-pymeshlab
+pymeshlab==2022.2.post4 # pointed out by @yuhuangyue in issue: https://github.com/guochengqian/Magic123/issues/45
 
 # cubvh
 git+https://github.com/ashawkey/cubvh
