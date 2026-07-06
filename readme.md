@@ -223,6 +223,10 @@ The script sets `TORCH_CUDA_ARCH_LIST=8.9`, runs `scripts/check_cuda_build_env.p
 
 Use `--save_mesh` to export the object. Coarse NeRF runs save mesh files under the run workspace, typically in a `mesh/` subdirectory, including `mesh.obj`, material, and texture files. DMTet fine-stage runs also write the final textured `.obj` assets under the fine-stage workspace. The `.mp4` files are render previews; the `.obj` plus its `.mtl` and texture images are the 3D object files to open in Blender, MeshLab, or another mesh viewer.
 
+### Evaluation metrics
+
+Metric utilities are in `all_metrics/metric_utils.py`, with example invocations in `all_metrics/test.sh`. PSNR, LPIPS, and related image metrics compare rendered prediction images against ground-truth images at matched viewpoints. For benchmark datasets such as RealFusion and NeRF4, the prediction images are rendered from the reconstructed 3D object at the dataset evaluation cameras, and the GT images are the corresponding held-out/reference dataset views. If you evaluate a custom object, render the reconstruction from the same camera poses as your GT images before running the metric script.
+
 ### Run ablation studies
 - Run Magic123 with only 2D prior *with* textual inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
     ```

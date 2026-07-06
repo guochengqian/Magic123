@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "magic123"
-version = "0.1.0"
+version = "0.1.1"
 description = "Magic123: one image to high-quality 3D object generation using 2D and 3D diffusion priors."
 readme = "readme.md"
 requires-python = ">=3.10"
