@@ -57,20 +57,30 @@ source venv_magic123/bin/activate
 python -m pip install --upgrade pip setuptools wheel
 python -m pip install magic123
 
-# Build the CUDA extensions after installing PyTorch. 4090/4090 Ti uses SM 8.9.
+# Build the CUDA extensions after installing PyTorch.
+# scripts/install_ext.sh auto-detects the GPU compute capability
+# (RTX 5090/Blackwell -> 12.0, 4090/4090 Ti -> 8.9). Override via TORCH_CUDA_ARCH_LIST.
 export CUDA_HOME=${CUDA_HOME:-/usr/local/cuda-12.9}
 export PATH=$CUDA_HOME/bin:$PATH
-export TORCH_CUDA_ARCH_LIST=${TORCH_CUDA_ARCH_LIST:-8.9}
 git clone https://github.com/guochengqian/Magic123.git
 cd Magic123
 bash scripts/install_ext.sh
 ```
 
+> RTX 5090 (Blackwell) needs a CUDA 12.8+ PyTorch build for `sm_120`, e.g.
+> `pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128`,
+> a CUDA 12.9 toolkit, and gcc-14 (CUDA 12.9 rejects gcc-15). Build the extensions with
+> `TORCH_CUDA_ARCH_LIST=12.0`. See `scripts/magic123/smoke_train_ironman_10_steps.sh` for a
+> one-command 10-step smoke test that auto-detects the arch and downloads Stable Diffusion 1.5
+> from the maintained mirror (`stable-diffusion-v1-5/stable-diffusion-v1-5`, since
+> `runwayml/stable-diffusion-v1-5` was removed from the Hub).
+
 The PyPI package ships the Python project and source code for the CUDA extensions. The extension modules are compiled locally because PyTorch CUDA extension wheels must match the local Python, PyTorch, CUDA toolkit, compiler, and GPU architecture.
 
 ### CUDA and Windows notes
 
-- NVIDIA RTX 4090 and 4090 Ti builds should set `TORCH_CUDA_ARCH_LIST=8.9`.
+- NVIDIA RTX 5090 (Blackwell) builds use `TORCH_CUDA_ARCH_LIST=12.0` and require a `cu128` PyTorch build and CUDA 12.8+ toolkit; RTX 4090 and 4090 Ti use `8.9`. `scripts/install_ext.sh` auto-detects this.
+- CUDA 12.9's `nvcc` supports GCC up to 14; if the system default is GCC 15, build with `gcc-14`/`g++-14` (e.g. `CC=gcc-14 CXX=g++-14`).
 - The CUDA toolkit must provide `nvcc`; check with `python scripts/check_cuda_build_env.py`.
 - Building the PyTorch CUDA extensions also requires Python development headers. On Ubuntu/Debian install `python3-dev` or the version-specific package such as `python3.10-dev`.
 - On Windows, install Visual Studio Build Tools with the "Desktop development with C++" workload and run installation from a Developer PowerShell or Developer Command Prompt. The setup scripts use `vswhere`/Visual Studio discovery to locate `cl.exe`, but CUDA still requires a Visual Studio version supported by the installed CUDA toolkit.

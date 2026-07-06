@@ -450,7 +450,7 @@ def compute_perceptual_similarity_from_list(pred_imgs_list, tgt_imgs_list,
 
         values_percsim += [perc_sim]
         values_ssim += [ssim_sim]
-        if psnr_sim != np.float("inf"):
+        if psnr_sim != float("inf"):
             values_psnr += [psnr_sim]
         else:
             if torch.allclose(p_img, t_img):

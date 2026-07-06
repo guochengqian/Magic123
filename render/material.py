@@ -152,7 +152,7 @@ def merge_materials(materials, texcoords, tfaces, mfaces):
             max_res = np.maximum(max_res, tex_res) if max_res is not None else tex_res
     
     # Compute size of compund texture and round up to nearest PoT
-    full_res = 2**np.ceil(np.log2(max_res * np.array([1, len(materials)]))).astype(np.int)
+    full_res = 2**np.ceil(np.log2(max_res * np.array([1, len(materials)]))).astype(np.int64)
 
     # Normalize texture resolution across all materials & combine into a single large texture
     for tex in textures:

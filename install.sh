@@ -11,10 +11,14 @@ set -euo pipefail
 #sudo apt update && sudo apt upgrade
 #sudo apt install git wget libeigen3-dev -y
 
-# 4090/4090 Ti: 8.9; A100: 8.0; 3090: 8.6; V100: 7.0; 2080 Ti: 7.5.
+# RTX 5090 (Blackwell): 12.0; 4090/4090 Ti: 8.9; A100: 8.0; 3090: 8.6; V100: 7.0; 2080 Ti: 7.5.
 export CUDA_HOME="${CUDA_HOME:-/usr/local/cuda-12.9}"
 export PATH="$CUDA_HOME/bin:$PATH"
-export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-8.9;8.6;8.0;7.5;7.0}"
+# Auto-detect the installed GPU's compute capability; override by exporting TORCH_CUDA_ARCH_LIST.
+if [ -z "${TORCH_CUDA_ARCH_LIST:-}" ]; then
+  DETECTED_CC="$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader 2>/dev/null | head -n1 | tr -d '[:space:]')"
+  export TORCH_CUDA_ARCH_LIST="${DETECTED_CC:-8.9;8.6;8.0;7.5;7.0}"
+fi
 
 # use python venv
 python3 -m venv venv_magic123

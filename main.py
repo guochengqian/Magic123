@@ -538,8 +538,8 @@ if __name__ == '__main__':
             if opt.save_mesh:
                 try:
                     trainer.save_mesh()
-                except:
-                    pass
+                except Exception:
+                    import traceback; traceback.print_exc()
     else:
         train_loader = NeRFDataset(
             opt, device=device, type='train', H=opt.h, W=opt.w, size=opt.dataset_size_train * opt.batch_size).dataloader()
@@ -626,5 +626,5 @@ if __name__ == '__main__':
             if opt.save_mesh:
                 try:
                     trainer.save_mesh()
-                except:
-                    pass
+                except Exception:
+                    import traceback; traceback.print_exc()

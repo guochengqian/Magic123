@@ -1,6 +1,14 @@
 import numpy as np
 import pymeshlab as pml
 
+# pymeshlab renamed its value wrapper classes in newer releases (2023.12+):
+# Percentage -> PercentageValue, AbsoluteValue -> PureValue. Alias them back so
+# this code runs on both the pinned old version and current pymeshlab (py3.12).
+if not hasattr(pml, 'Percentage') and hasattr(pml, 'PercentageValue'):
+    pml.Percentage = pml.PercentageValue
+if not hasattr(pml, 'AbsoluteValue') and hasattr(pml, 'PureValue'):
+    pml.AbsoluteValue = pml.PureValue
+
 def poisson_mesh_reconstruction(points, normals=None):
     # points/normals: [N, 3] np.ndarray
 

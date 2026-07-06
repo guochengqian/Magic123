@@ -35,7 +35,9 @@ class SpecifyGradient(torch.autograd.Function):
 # load model
 def load_model_from_config(config, ckpt, device, vram_O=False, verbose=False):
 
-    pl_sd = torch.load(ckpt, map_location='cpu')
+    # weights_only defaults to True in torch>=2.6; the official zero123 ckpt embeds
+    # a pickled PyTorch-Lightning ModelCheckpoint, so load with weights_only=False (trusted file).
+    pl_sd = torch.load(ckpt, map_location='cpu', weights_only=False)
 
     if 'global_step' in pl_sd and verbose:
         print(f'[INFO] Global Step: {pl_sd["global_step"]}')

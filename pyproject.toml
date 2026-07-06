@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "magic123"
-version = "0.1.1"
+version = "0.1.2"
 description = "Magic123: one image to high-quality 3D object generation using 2D and 3D diffusion priors."
 readme = "readme.md"
 requires-python = ">=3.10"
@@ -42,20 +42,20 @@ dependencies = [
   "tensorboard",
   "tensorboardX",
   "dearpygui",
-  "huggingface_hub",
-  "diffusers>=0.9.0",
+  "huggingface_hub<1.0",
+  "diffusers>=0.9.0,<1.0",
   "accelerate",
-  "transformers",
+  # transformers 5.x removed CLIPFeatureExtractor and other symbols this code relies on.
+  "transformers>=4.25,<5",
   "xatlas",
   "PyMCubes",
-  "rembg",
   "omegaconf",
   "pytorch-lightning",
   "taming-transformers-rom1504",
   "kornia",
   "gdown",
   "trimesh",
-  "pymeshlab==2022.2.post4",
+  "pymeshlab",
   "timm==0.6.7",
   "easydict",
   "wandb",
@@ -67,6 +67,9 @@ dependencies = [
 
 [project.optional-dependencies]
 cuda = []
+# Image preprocessing (foreground segmentation) only; not needed for training.
+# These pull heavy/old transitive deps, so they are kept out of the core install.
+preprocess = ["rembg", "carvekit-colab"]
 dev = ["build", "twine"]
 
 [project.urls]
