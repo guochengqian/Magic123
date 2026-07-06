@@ -46,8 +46,35 @@ Official PyTorch Implementation of Magic123: One Image to High-Quality 3D Object
 We only test on Ubuntu system. Make sure git, wget, Eigen are installed.  
 ```
 apt update && apt upgrade
-apt install git wget libeigen3-dev -y
+apt install git wget libeigen3-dev python3-dev python3-venv -y
 ```
+
+### Install from PyPI
+
+```bash
+python -m venv venv_magic123
+source venv_magic123/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install magic123
+
+# Build the CUDA extensions after installing PyTorch. 4090/4090 Ti uses SM 8.9.
+export CUDA_HOME=${CUDA_HOME:-/usr/local/cuda-12.9}
+export PATH=$CUDA_HOME/bin:$PATH
+export TORCH_CUDA_ARCH_LIST=${TORCH_CUDA_ARCH_LIST:-8.9}
+git clone https://github.com/guochengqian/Magic123.git
+cd Magic123
+bash scripts/install_ext.sh
+```
+
+The PyPI package ships the Python project and source code for the CUDA extensions. The extension modules are compiled locally because PyTorch CUDA extension wheels must match the local Python, PyTorch, CUDA toolkit, compiler, and GPU architecture.
+
+### CUDA and Windows notes
+
+- NVIDIA RTX 4090 and 4090 Ti builds should set `TORCH_CUDA_ARCH_LIST=8.9`.
+- The CUDA toolkit must provide `nvcc`; check with `python scripts/check_cuda_build_env.py`.
+- Building the PyTorch CUDA extensions also requires Python development headers. On Ubuntu/Debian install `python3-dev` or the version-specific package such as `python3.10-dev`.
+- On Windows, install Visual Studio Build Tools with the "Desktop development with C++" workload and run installation from a Developer PowerShell or Developer Command Prompt. The setup scripts use `vswhere`/Visual Studio discovery to locate `cl.exe`, but CUDA still requires a Visual Studio version supported by the installed CUDA toolkit.
+- On Colab, install PyTorch and the matching CUDA toolkit first, then run `bash scripts/install_ext.sh`. If Colab changes its compiler or CUDA image, rebuild the extensions with `--no-cache-dir`.
 
 ### Install Environment 
 
@@ -181,6 +208,20 @@ textual inversion is tedious (requires ~2.5 hours optimization), if you want to 
     --bg_radius -1 \
     --save_mesh 
     ```
+
+### 10-step CUDA smoke test on the Ironman example
+
+After installing dependencies and CUDA extensions, run a short 4090-class smoke test:
+
+```bash
+bash scripts/magic123/smoke_train_ironman_10_steps.sh 0 out/smoke-ironman-10-steps
+```
+
+The script sets `TORCH_CUDA_ARCH_LIST=8.9`, runs `scripts/check_cuda_build_env.py`, trains for 10 iterations, and saves outputs under the workspace argument. The default workspace is `out/smoke-ironman-10-steps`.
+
+### Outputs and mesh export
+
+Use `--save_mesh` to export the object. Coarse NeRF runs save mesh files under the run workspace, typically in a `mesh/` subdirectory, including `mesh.obj`, material, and texture files. DMTet fine-stage runs also write the final textured `.obj` assets under the fine-stage workspace. The `.mp4` files are render previews; the `.obj` plus its `.mtl` and texture images are the 3D object files to open in Blender, MeshLab, or another mesh viewer.
 
 ### Run ablation studies
 - Run Magic123 with only 2D prior *with* textual inversion (Like RealFusion but we achieve much better performance through training stragies and the coarse-to-fine pipeline)
@@ -318,4 +359,3 @@ year={2024},
 url={https://openreview.net/forum?id=0jHkUDyEO9}
 }
 ```
-

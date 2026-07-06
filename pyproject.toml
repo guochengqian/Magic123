@@ -1,0 +1,108 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "magic123"
+version = "0.1.0"
+description = "Magic123: one image to high-quality 3D object generation using 2D and 3D diffusion priors."
+readme = "readme.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Guocheng Qian" }
+]
+keywords = ["3d-generation", "diffusion", "nerf", "cuda", "pytorch"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "tqdm",
+  "rich",
+  "ninja",
+  "numpy",
+  "scipy",
+  "scikit-learn",
+  "matplotlib",
+  "opencv-python",
+  "imageio",
+  "imageio-ffmpeg",
+  "pandas",
+  "torch",
+  "torchvision",
+  "torch-ema",
+  "einops",
+  "tensorboard",
+  "tensorboardX",
+  "dearpygui",
+  "huggingface_hub",
+  "diffusers>=0.9.0",
+  "accelerate",
+  "transformers",
+  "xatlas",
+  "PyMCubes",
+  "rembg",
+  "omegaconf",
+  "pytorch-lightning",
+  "taming-transformers-rom1504",
+  "kornia",
+  "gdown",
+  "trimesh",
+  "pymeshlab==2022.2.post4",
+  "timm==0.6.7",
+  "easydict",
+  "wandb",
+  "termcolor",
+  "sentencepiece",
+  "psutil",
+  "lpips",
+]
+
+[project.optional-dependencies]
+cuda = []
+dev = ["build", "twine"]
+
+[project.urls]
+Homepage = "https://guochengqian.github.io/project/magic123/"
+Repository = "https://github.com/guochengqian/Magic123"
+Issues = "https://github.com/guochengqian/Magic123/issues"
+
+[tool.setuptools]
+include-package-data = true
+py-modules = [
+  "activation",
+  "dpt",
+  "encoding",
+  "gradio_app",
+  "main",
+  "meshutils",
+  "optimizer",
+  "preprocess_image",
+  "setup_cuda_ext",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "all_metrics*",
+  "dnnultis*",
+  "freqencoder*",
+  "gridencoder*",
+  "guidance*",
+  "ldm*",
+  "midas*",
+  "nerf*",
+  "raymarching*",
+  "render*",
+  "shencoder*",
+  "taichi_modules*",
+  "taming*",
+]
+namespaces = true

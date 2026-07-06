@@ -1,0 +1,16 @@
+include LICENSE
+include readme.md
+include requirements.txt
+include requirements-torch201-cuda117.txt
+include setup_cuda_ext.py
+recursive-include assets *
+recursive-include data/demo *
+recursive-include docs/static *
+recursive-include pretrained/zero123 *.yaml
+recursive-include raymarching/src *.cpp *.cu *.h
+recursive-include shencoder/src *.cpp *.cu *.h
+recursive-include freqencoder/src *.cpp *.cu *.h
+recursive-include gridencoder/src *.cpp *.cu *.h
+recursive-include render/renderutils/c_src *.cpp *.cu *.h
+recursive-include scripts *.sh *.py
+global-exclude __pycache__ *.py[cod] .DS_Store

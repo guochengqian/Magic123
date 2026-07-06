@@ -14,6 +14,7 @@ scripts/paper
 # */validataion
 *csv
 build/
+dist/
 *.egg-info/
 *.so
 .vscode/ 
